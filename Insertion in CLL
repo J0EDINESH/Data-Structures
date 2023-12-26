@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *nxt;
+}*head,*temp,*new;
+int main()
+{
+    int flag = 1;
+    while(flag==1)
+    {
+        int ch;
+        printf("Press 1 to create new node\nPress 2 to display.\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            {
+                new=(struct node *)malloc(sizeof(struct node));
+                printf("Enter the value : ");
+                scanf("%d",&new->data);
+                new->nxt=NULL;
+                if(head == NULL)
+                {
+                    head=new;
+                    temp=new;
+                    new->nxt=head;
+                }
+                else
+                {
+                    int ins;
+                    printf("Press 1 to add node at front\nPress 2 to insert node at middle\nPress 3 to insert node at last\n");
+                    scanf("%d",&ins);
+                    switch(ins)
+                    {
+                        case 1:
+                        {
+                            temp->nxt=new;
+                            new->nxt=head;
+                            head=new;
+                        }break;
+                        case 2:
+                        { 
+                            int x;
+                            printf("After which node the element is to be inserted :\n");
+                            scanf("%d",&x);
+                            while(temp->data != x && temp->nxt!=NULL)
+                            {
+                                temp=temp->nxt;
+                            }
+                            if(temp->data == x)
+                            {
+                                new->nxt= temp->nxt;
+                                temp->nxt=new;
+                                new=NULL;
+                                temp=NULL;
+                            }
+                            printf("Node is inserted after %d\n",x);
+                        }break;
+                        case 3:
+                        {
+                            new->nxt=head;
+                            temp->nxt=new;
+                            temp=new;
+                        }break;
+                        default :
+                        break;
+                    }
+                }
+            }
+            break;
+            case 2:
+            {
+                temp = head;
+                while(temp->nxt != head)
+                {
+                    printf("%d ",temp->data);
+                    temp = temp->nxt;
+                }
+                printf("%d ",temp->data);
+            }printf("\n");
+            default :
+            break;
+        }
+        printf("press 1 to continue....\n");
+        scanf("%d",&ch);
+    }
+   
+}
+
+
