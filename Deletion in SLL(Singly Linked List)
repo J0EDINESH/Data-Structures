@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *nxt;
+}*head,*temp,*temp1;
+int main()
+{
+    int fact=1,value;
+    while(fact==1)
+    {
+        int c;
+        printf("Press 1 to create singly linked list\nPress 2 to delete node\nPress 3 to display\n");
+        scanf("%d",&c);
+        switch(c)
+        
+        {
+            //creating sll
+            case 1:
+            {
+                struct node *new = (struct node *)malloc(sizeof(struct node));
+                printf("Enter the value :");
+                scanf("%d",&value);
+                new->data = value;
+                new->nxt = NULL;
+                temp = head;
+                if(head==NULL)
+                {
+                    head = new;
+                }
+                else
+                {
+                    while(temp->nxt!=NULL)
+                    {
+                        temp=temp->nxt;
+                    }
+                    temp->nxt=new;
+                }
+            }break;
+            case 2://deleting node
+            {
+                if(head==NULL)
+                {
+                    printf("\nList is empty.\n");
+                }
+                else
+                {
+                    int del;
+                    printf("Press 1 to delete first node\nPress 2 to delete middle node\nPress 3 to delete last node");
+                    scanf("\n%d",&del);
+                    switch(del)
+                    {
+                        case 1://deleting first node
+                        {
+                            head=head->nxt;
+                        }break;
+                        case 2://deleting at middle
+                        {
+                        
+                            printf("\nEnter the value to be deleted :");
+                            while(temp->data!= value)
+                            {
+                                temp1 = temp;
+                                temp = temp->nxt;
+                            }temp1->nxt= temp->nxt;
+                            temp->nxt=NULL;
+                            
+                        }break;
+                        case 3://deleting last node
+                        {
+                            while(temp->nxt!=NULL)
+                            {
+                                temp1=temp;
+                                temp=temp->nxt;
+                            }
+                            temp->nxt=NULL;
+                            printf("\nLast node is deleted.");
+                        }break;
+                    }
+                
+                }
+            } break;
+            case 3 ://display the node
+            {
+                temp=head;
+                while(temp->nxt!=NULL)
+                {
+                    printf("%d ",temp->data);
+                    temp = temp->nxt;
+                }
+                printf("%d ",temp->data);
+            }printf("\n");
+            break;
+            default :
+            break;
+            
+        }
+        printf("Press 1 to continue....\n");
+        scanf("%d",&c);
+    }
+}
+
